@@ -7,7 +7,7 @@ var storage = 0
 
 function appendToDisplay(value) {
     var display = document.querySelector('.calculator__display');
-    display.textContent += value;
+    display.textContent = parseFloat(display.textContent+value);
 }
 
 function clear() {
@@ -37,9 +37,10 @@ document.querySelectorAll('.calculator__keys button').forEach(button => {
         var value = display.textContent;
         
         if (action === 'clear') {
-            clear(); 
+            clear();
+            storage = 0;
         } else if (action === 'calculate') {
-            value = operation(value, storage, currentoperation)
+            value = operation(storage, value, currentoperation)
             console.log(value)
             clear()
             
@@ -49,6 +50,7 @@ document.querySelectorAll('.calculator__keys button').forEach(button => {
         }
         else if (this.getAttribute('class')=== 'key--operator') {
             currentoperation = action;
+            
             store();
             clear();
         }
